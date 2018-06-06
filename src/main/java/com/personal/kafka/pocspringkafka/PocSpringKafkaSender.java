@@ -27,14 +27,12 @@ public class PocSpringKafkaSender implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
 
-        List<String> messages = Arrays.asList("Spring", "Kubernete", "git");
+        List<String> messages = Arrays.asList("Spring", "Kubernetes", "git");
 
         Random position = new Random();
 
-        Runnable runnable = () -> {
-            echoSenderService.sendMessage(new Echo(messages.get(position.nextInt(messages.size()))));
+        Runnable runnable = () -> echoSenderService.sendMessage(new Echo(messages.get(position.nextInt(messages.size()))));
 
-        };
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(runnable, 1, 1, TimeUnit.SECONDS);
     }
 }
